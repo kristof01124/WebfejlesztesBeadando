@@ -6,12 +6,21 @@ import java.util.List;
 
 @Entity
 @Table(name = "SITE_USERS")
-public class SiteUserDTO implements Serializable {
+public class SiteUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
     private Long userId;
+
+    public SiteUser(Long userId, String firstName, String lastName, String username, String password, List<Order> orders) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.orders = orders;
+    }
 
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -25,8 +34,12 @@ public class SiteUserDTO implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(mappedBy = "siteUserDto")
-    private List<OrderDTO> orders;
+    @OneToMany(mappedBy = "siteUser")
+    private List<Order> orders;
+
+    public SiteUser() {
+
+    }
 
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -48,7 +61,7 @@ public class SiteUserDTO implements Serializable {
         this.password = password;
     }
 
-    public void setOrders(List<OrderDTO> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
@@ -72,7 +85,7 @@ public class SiteUserDTO implements Serializable {
         return password;
     }
 
-    public List<OrderDTO> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 }

@@ -5,17 +5,21 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "ORDERS")
-public class OrderDTO implements Serializable {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID")
-    private Long id;
+    private Long orderId;
 
     @Column(name = "ORDER_NAME")
     private String orderName;
 
-    public void setId(Long id) {
-        this.id = id;
+    public Order() {
+
+    }
+
+    public void setOrderId(Long id) {
+        this.orderId = id;
     }
 
     public void setOrderName(String orderName) {
@@ -26,12 +30,12 @@ public class OrderDTO implements Serializable {
         this.price = price;
     }
 
-    public void setSiteUserDto(SiteUserDTO siteUserDto) {
-        this.siteUserDto = siteUserDto;
+    public void setSiteUserDto(SiteUser siteUser) {
+        this.siteUser = siteUser;
     }
 
-    public Long getId() {
-        return id;
+    public Long getOrderId() {
+        return orderId;
     }
 
     public String getOrderName() {
@@ -42,14 +46,21 @@ public class OrderDTO implements Serializable {
         return price;
     }
 
-    public SiteUserDTO getSiteUserDto() {
-        return siteUserDto;
+    public SiteUser getSiteUserDto() {
+        return siteUser;
     }
 
     @Column(name = "ORDER_PRICE")
     private double price;
 
+    public Order(Long orderId, String orderName, double price, SiteUser siteUser) {
+        this.orderId = orderId;
+        this.orderName = orderName;
+        this.price = price;
+        this.siteUser = siteUser;
+    }
+
     @ManyToOne
     @JoinColumn(name = "SITE_USER")
-    private SiteUserDTO siteUserDto;
+    private SiteUser siteUser;
 }
