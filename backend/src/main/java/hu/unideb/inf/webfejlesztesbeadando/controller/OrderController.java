@@ -25,14 +25,14 @@ public class OrderController {
         return new ResponseEntity(orderService.create(orderDTO), HttpStatus.CREATED);
     }
 
-    @PostMapping("/updateOrder")
+    @PatchMapping("/updateOrder")
     ResponseEntity updateOrder(@RequestBody OrderDTO orderDTO) {
         return new ResponseEntity(orderService.update(orderDTO), HttpStatus.OK);
     }
 
-    @PostMapping("/deleteOrder")
-    ResponseEntity deleteOrder(@RequestBody Long id) {
-        orderService.delete(id);
+    @DeleteMapping("/deleteOrder")
+    ResponseEntity deleteOrder(@RequestBody OrderDTO orderDTO) {
+        orderService.delete(orderDTO.orderId());
         return new ResponseEntity(HttpStatus.OK);
     }
 

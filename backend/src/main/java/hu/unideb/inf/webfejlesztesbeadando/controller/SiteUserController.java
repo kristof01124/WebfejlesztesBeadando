@@ -27,14 +27,14 @@ public class SiteUserController {
         return new ResponseEntity(siteUserService.create(siteUserDTO), HttpStatus.CREATED);
     }
 
-    @PostMapping("/updateUser")
+    @PatchMapping("/updateUser")
     ResponseEntity updateOrder(@RequestBody SiteUserDTO siteUserDTO) {
         return new ResponseEntity(siteUserService.update(siteUserDTO), HttpStatus.OK);
     }
 
-    @PostMapping("/deleteUser")
-    ResponseEntity deleteOrder(@RequestBody Long id) {
-        siteUserService.delete(id);
+    @DeleteMapping("/deleteUser")
+    ResponseEntity deleteOrder(@RequestBody SiteUserDTO siteUserDTO) {
+        siteUserService.delete(siteUserDTO.userId());
         return new ResponseEntity(HttpStatus.OK);
     }
 
